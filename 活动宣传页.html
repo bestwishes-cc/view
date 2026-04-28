@@ -245,17 +245,24 @@ body {
   object-fit:cover; pointer-events:none; z-index:1;
   mix-blend-mode:multiply;
 }
-.section-bg-img.ink-wash {
-  opacity:0.12; filter:saturate(0.1) brightness(0.9);
+.section-bg-img.hero-lake {
+  opacity:0.25; filter:saturate(0.7) brightness(0.85) contrast(1.1);
 }
-.section-bg-img.tea-field {
-  opacity:0.07; filter:saturate(0) brightness(0.85);
+.section-bg-img.hero-gradient {
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:linear-gradient(180deg, rgba(247,244,237,0.6) 0%, rgba(247,244,237,0.1) 40%, rgba(247,244,237,0.3) 100%);
 }
-.section-bg-img.incense {
-  opacity:0.09; filter:saturate(0) brightness(0.8) blur(1px);
+.section-bg-img.intro-lake {
+  opacity:0.15; filter:saturate(0.6) brightness(0.9);
 }
-.section-bg-img.teaware {
-  opacity:0.05; filter:saturate(0.1) brightness(0.9);
+.section-bg-img.tea-plantation {
+  opacity:0.22; filter:saturate(0.8) brightness(0.9);
+}
+.section-bg-img.temple {
+  opacity:0.2; filter:saturate(0.6) brightness(0.85);
+}
+.section-bg-img.tea-picker {
+  opacity:0.15; filter:saturate(0.7) brightness(0.9);
 }
 
 /* ═══ RESPONSIVE ═══ */
@@ -278,7 +285,8 @@ body {
 <!-- ═══════════ HERO ═══════════ -->
 <section class="snap-section hero-section" data-section="hero">
   <div class="parallax-sky" id="parallaxSky"></div>
-  <img class="section-bg-img ink-wash" src="https://images.unsplash.com/photo-1762114974371-898c0cb649d4?w=1200&fm=jpg" alt="" loading="lazy" decoding="async">
+  <img class="section-bg-img hero-lake" src="https://images.unsplash.com/photo-1669532055370-b0c282cb115f?w=1200&fm=jpg" alt="" loading="lazy" decoding="async">
+  <div class="hero-gradient"></div>
   <div class="parallax-mountains" id="parallaxMountains"></div>
   <div class="parallax-mist" id="parallaxMist"></div>
 
@@ -298,6 +306,7 @@ body {
 
 <!-- ═══════════ 导语 ═══════════ -->
 <section class="snap-section intro-section" data-section="intro">
+  <img class="section-bg-img intro-lake" src="https://images.unsplash.com/photo-1697553308664-5aed18530490?w=1200&fm=jpg" alt="" loading="lazy" decoding="async">
   <div class="section-watermark">壹</div>
   <div class="section-inner">
     <p class="intro-quote">
@@ -311,7 +320,7 @@ body {
 
 <!-- ═══════════ D1 ═══════════ -->
 <section class="snap-section" data-section="d1">
-  <img class="section-bg-img tea-field" src="https://images.unsplash.com/photo-1544451822-38e32b887c08?w=800&fm=jpg" alt="" loading="lazy" decoding="async">
+  <img class="section-bg-img tea-plantation" src="https://images.unsplash.com/photo-1680535105125-0f719ce3b2c8?w=1200&fm=jpg" alt="" loading="lazy" decoding="async">
   <div class="section-watermark">贰</div>
   <div class="section-inner">
     <div class="section-label">行程概览</div>
@@ -333,7 +342,7 @@ body {
 
 <!-- ═══════════ D2 ═══════════ -->
 <section class="snap-section" data-section="d2">
-  <img class="section-bg-img incense" src="https://images.unsplash.com/photo-1551690935-a9e6f0a7e788?w=800&fm=jpg" alt="" loading="lazy" decoding="async">
+  <img class="section-bg-img temple" src="https://images.unsplash.com/photo-1701070658926-5a7844890fb6?w=1200&fm=jpg" alt="" loading="lazy" decoding="async">
   <div class="section-watermark">叁</div>
   <div class="section-inner">
     <div class="section-label">行程概览</div>
@@ -369,7 +378,7 @@ body {
 
 <!-- ═══════════ 联络 ═══════════ -->
 <section class="snap-section" data-section="contact">
-  <img class="section-bg-img teaware" src="https://images.unsplash.com/photo-1689067468083-2e5f44e43f40?w=600&fm=jpg" alt="" loading="lazy" decoding="async">
+  <img class="section-bg-img tea-picker" src="https://images.unsplash.com/photo-1648874856218-6e25adc4e88e?w=1200&fm=jpg" alt="" loading="lazy" decoding="async">
   <div class="section-watermark">伍</div>
   <div class="section-inner" style="text-align:center">
     <div class="section-label">地点与联络</div>
