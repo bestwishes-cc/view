@@ -265,6 +265,30 @@ body {
   opacity:0.15; filter:saturate(0.7) brightness(0.9);
 }
 
+/* ═══ PRELOADER ═══ */
+#preloader {
+  position:fixed; inset:0; z-index:99999; background:var(--paper);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  transition:opacity 0.6s var(--ease-smooth), visibility 0.6s;
+}
+#preloader.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+
+.preloader-seal {
+  width:52px; height:52px; border:2px solid var(--vermillion); color:var(--vermillion);
+  font-family:'Ma Shan Zheng','ZCOOL XiaoWei',cursive; font-size:14px;
+  display:flex; align-items:center; justify-content:center;
+  transform:rotate(-8deg);
+  animation:preloaderPulse 1.5s ease-in-out infinite;
+}
+@keyframes preloaderPulse {
+  0%,100%{opacity:0.4;transform:rotate(-8deg) scale(1)}
+  50%{opacity:1;transform:rotate(-8deg) scale(1.1)}
+}
+.preloader-text {
+  margin-top:1.2rem; font-size:0.7rem; letter-spacing:0.35em;
+  color:var(--tea); animation:preloaderPulse 1.5s ease-in-out 0.3s infinite;
+}
+
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:380px){ .snap-section{padding:1.8rem 1rem} }
 @media(min-width:768px){ .section-inner{max-width:520px} }
@@ -275,6 +299,11 @@ body {
 </style>
 </head>
 <body>
+
+<div id="preloader">
+  <div class="preloader-seal">禅</div>
+  <div class="preloader-text">灵隐问禅 · 静候展开</div>
+</div>
 
 <div class="noise-overlay"></div>
 <canvas id="particle-canvas"></canvas>
@@ -391,9 +420,6 @@ body {
       <div class="r"><strong>活动地点</strong></div>
       <div class="r">大家的家 · 隐湖云舍旅居社区</div>
       <div class="r">杭州市西湖区龙井路</div>
-      <div class="r" style="margin-top:0.4rem;"><strong>预订 & 咨询</strong></div>
-      <div class="r">电话：0571-8891 9111</div>
-      <div class="r">邮箱：gaofuguanjia@126.com</div>
       <div class="r sub">距黄龙商圈 2.5km &nbsp;/&nbsp; 萧山机场 40km<br>杭州东站 40min &nbsp;/&nbsp; 杭州西站 30min</div>
     </div>
   </div>
@@ -406,6 +432,41 @@ body {
 <script>
 (function() {
   'use strict';
+
+  // ═══ PRELOADER ═══
+  const preloader = document.getElementById('preloader');
+  const images = Array.from(document.querySelectorAll('img[src]'));
+  let loadedCount = 0;
+  const totalImages = images.length;
+
+  function imageLoaded() {
+    loadedCount++;
+    if (loadedCount >= totalImages) hidePreloader();
+  }
+
+  function hidePreloader() {
+    if (!preloader || preloader.classList.contains('hidden')) return;
+    preloader.classList.add('hidden');
+    // Remove from DOM after fade
+    setTimeout(() => { if (preloader.parentNode) preloader.remove(); }, 700);
+  }
+
+  // Track all images
+  if (totalImages === 0) {
+    hidePreloader();
+  } else {
+    images.forEach(img => {
+      if (img.complete && img.naturalWidth > 0) {
+        imageLoaded();
+      } else {
+        img.addEventListener('load', imageLoaded, { once: true });
+        img.addEventListener('error', imageLoaded, { once: true });
+      }
+    });
+  }
+
+  // Safety timeout: hide preloader after 8s regardless
+  setTimeout(hidePreloader, 8000);
 
   // ═══ CANVAS PARTICLE ENGINE ═══
   const canvas = document.getElementById('particle-canvas');
