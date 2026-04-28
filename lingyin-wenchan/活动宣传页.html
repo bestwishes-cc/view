@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>灵隐问禅 · 高客服务发布会</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a1a; --ink-soft: #3d3d3d; --ink-wash: #2a2520;
+  --paper: #f7f4ed; --paper-warm: #efe9db;
+  --tea: #8B6914; --tea-light: #b8912e; --tea-glow: #d4af5e;
+  --celadon: #7a9a7e; --celadon-dark: #5a7a5e;
+  --vermillion: #c1443a; --vermillion-deep: #9a2f28;
+  --gold: #c4a35a; --gold-bright: #e0c878;
+  --gold-shimmer: rgba(224,200,120,0.5);
+  --ease-smooth: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: auto; font-size:16px; -webkit-tap-highlight-color:transparent; }
+body {
+  font-family:'Noto Serif SC','Songti SC','STSong','SimSun',serif;
+  background:var(--paper); color:var(--ink); line-height:1.85;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden; overscroll-behavior:none;
+}
+
+/* ═══ NOISE ═══ */
+.noise-overlay {
+  position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:0.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ═══ CANVAS ═══ */
+#particle-canvas {
+  position:fixed; inset:0; z-index:0; pointer-events:none; width:100%; height:100%;
+}
+
+/* ═══ SCROLL RIBBON ═══ */
+.scroll-ribbon {
+  position:fixed; top:0; left:0; height:2.5px; z-index:10000;
+  background:linear-gradient(90deg,transparent,var(--gold-bright),var(--tea-light),var(--gold-bright),transparent);
+  background-size:200% 100%; animation:shimmer 2s linear infinite;
+  transition:width 0.12s linear; box-shadow:0 0 10px var(--gold-shimmer);
+}
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+/* ═══ SCROLL SNAP CONTAINER ═══ */
+.scroll-container { scroll-snap-type:y mandatory; overflow-y:auto; height:100vh; height:100dvh; }
+
+/* ═══ SECTION BASE ═══ */
+.snap-section {
+  min-height:100vh; min-height:100dvh; scroll-snap-align:start;
+  display:flex; flex-direction:column; justify-content:center;
+  padding:2rem 1.2rem; position:relative; z-index:1; overflow:hidden;
+}
+.snap-section.hero-section { padding:0; }
+
+/* Ink reveal overlay */
+.snap-section::after {
+  content:''; position:absolute; inset:0; z-index:10; pointer-events:none;
+  background:linear-gradient(90deg,var(--ink-deep) 0%,var(--ink) 40%,transparent 100%);
+  clip-path:inset(0 0 0 0); transition:clip-path 1s var(--ease-smooth);
+}
+.snap-section.revealed::after { clip-path:inset(0 0 0 100%); }
+
+/* Section watermark numbers */
+.section-watermark {
+  position:absolute; bottom:0.5rem; right:0.8rem; z-index:0; pointer-events:none;
+  font-family:'Ma Shan Zheng','ZCOOL XiaoWei',cursive;
+  font-size:clamp(5rem,18vw,10rem); color:rgba(26,26,26,0.03);
+  line-height:0.8; user-select:none;
+}
+
+.section-inner { position:relative; z-index:2; max-width:420px; margin:0 auto; width:100%; }
+.section-label { font-size:0.65rem; letter-spacing:0.4em; color:var(--celadon-dark); font-weight:600; margin-bottom:0.3rem; }
+.section-title {
+  font-family:'Ma Shan Zheng','ZCOOL XiaoWei',cursive;
+  font-size:clamp(2rem,7vw,2.6rem); font-weight:400; color:var(--ink); margin-bottom:0.3rem; line-height:1.2;
+}
+.section-desc { font-size:0.85rem; color:var(--ink-soft); font-weight:300; margin-bottom:1.5rem; }
+
+/* ═══ HERO ═══ */
+.hero-section { min-height:100vh; min-height:100dvh; position:relative; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden; }
+.hero-section::after { display:none; }
+
+/* Parallax layers */
+.parallax-sky {
+  position:absolute; inset:0; z-index:0;
+  background:linear-gradient(180deg, #f9f6f0 0%, #efe9db 50%, #e8e0ce 100%);
+}
+.parallax-mountains {
+  position:absolute; bottom:0; left:-5%; right:-5%; height:60%; z-index:1;
+  background:
+    radial-gradient(ellipse 90% 50% at 25% 95%, rgba(26,26,26,0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 45% at 60% 90%, rgba(26,26,26,0.09) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 40% at 80% 98%, rgba(26,26,26,0.06) 0%, transparent 50%);
+}
+.parallax-mist {
+  position:absolute; bottom:0; left:-15%; right:-15%; height:45%; z-index:2;
+  background:linear-gradient(to top, rgba(247,244,237,1) 0%, rgba(247,244,237,0.8) 30%, transparent 100%);
+  animation:mistBreathe 10s ease-in-out infinite;
+}
+@keyframes mistBreathe { 0%,100%{opacity:0.75; transform:translateY(0)} 50%{opacity:0.95; transform:translateY(-18px)} }
+
+.hero-content { position:relative; z-index:3; max-width:400px; padding:2rem 1.2rem; }
+
+.seal-wrap { margin-bottom:1.2rem; }
+.seal {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:56px; height:56px; border:2.5px solid var(--vermillion); color:var(--vermillion);
+  font-family:'Ma Shan Zheng','ZCOOL XiaoWei',cursive; font-size:16px;
+  transform:rotate(-8deg); box-shadow:0 0 0 3px var(--paper), 0 0 0 5.5px var(--vermillion);
+  opacity:0; animation:sealDrop 0.7s 0.2s var(--ease-spring) forwards;
+}
+@keyframes sealDrop {
+  0%{opacity:0; transform:translateY(-40px) rotate(-8deg) scale(1.8)}
+  60%{transform:translateY(4px) rotate(-8deg) scale(0.95)}
+  100%{opacity:1; transform:translateY(0) rotate(-8deg) scale(1)}
+}
+
+.hero-tag { font-size:0.7rem; letter-spacing:0.35em; color:var(--tea); margin-bottom:0.8rem; opacity:0; animation:fadeRise 0.8s 0.5s forwards; }
+
+/* Character animation */
+.char-reveal { display:inline-block; clip-path:inset(0 100% 0 0); animation:charWrite 0.6s var(--ease-smooth) forwards; }
+@keyframes charWrite { to { clip-path:inset(0 0 0 0); } }
+
+.hero-title {
+  font-family:'Ma Shan Zheng','ZCOOL XiaoWei',cursive;
+  font-size:clamp(3.5rem,13vw,5.5rem); font-weight:400; color:var(--ink);
+  line-height:1.15; letter-spacing:0.08em;
+}
+.hero-subtitle { font-size:clamp(0.95rem,3vw,1.3rem); color:var(--ink-soft); font-weight:300; margin-top:0.4rem; letter-spacing:0.15em; opacity:0; animation:fadeRise 0.8s 1.3s forwards; }
+.hero-line { width:50px; height:1.5px; background:linear-gradient(90deg,var(--tea-light),var(--gold-bright)); margin:1.2rem auto; opacity:0; animation:fadeRise 0.8s 1.5s forwards; }
+.hero-info { font-size:0.8rem; color:var(--ink-soft); line-height:2.2; opacity:0; animation:fadeRise 0.8s 1.7s forwards; }
+.hero-info em { font-style:normal; color:var(--tea); font-weight:600; }
+
+@keyframes fadeRise { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+.scroll-cue {
+  position:absolute; bottom:max(1.5rem, env(safe-area-inset-bottom,1.5rem)); left:50%; transform:translateX(-50%); z-index:3;
+  opacity:0; animation:fadeRise 0.8s 2s forwards;
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+}
+.scroll-cue span { font-size:0.6rem; letter-spacing:0.3em; color:var(--tea); }
+.scroll-cue .line { width:1px; height:28px; background:linear-gradient(to bottom,var(--tea-light),transparent); animation:cuePulse 2.2s ease-in-out infinite; }
+@keyframes cuePulse { 0%,100%{opacity:0.25;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.4)} }
+
+/* ═══ INTRO ═══ */
+.intro-section { text-align:center; background:linear-gradient(180deg,transparent 0%,rgba(196,163,90,0.05) 40%,rgba(196,163,90,0.05) 60%,transparent 100%); }
+.intro-section::after { display:none; }
+.intro-quote {
+  font-family:'Ma Shan Zheng','ZCOOL XiaoWei',cursive;
+  font-size:clamp(1.15rem,4vw,1.45rem); color:var(--ink-soft);
+  line-height:2.2; max-width:360px; margin:0 auto;
+}
+.intro-quote em { font-style:normal; color:var(--tea); }
+
+/* ═══ SECTION DIVIDER SVG BRUSH ═══ */
+.brush-divider { width:100%; max-width:200px; margin:0 auto; display:block; opacity:0.5; }
+.brush-divider .brush-path { fill:none; stroke:var(--tea-light); stroke-width:2; stroke-linecap:round; stroke-dasharray:300; stroke-dashoffset:300; transition:stroke-dashoffset 1.5s var(--ease-smooth); }
+.brush-divider.drawn .brush-path { stroke-dashoffset:0; }
+
+/* ═══ GOLD RULE ═══ */
+.gold-rule { width:100%; max-width:300px; margin:2rem auto; position:relative; text-align:center; }
+.gold-rule::before { content:''; display:block; height:1px; background:linear-gradient(90deg,transparent,var(--gold-bright),transparent); }
+.gold-rule::after { content:'◆'; font-size:0.45rem; color:var(--gold); position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:var(--paper); padding:0 10px; }
+
+/* ═══ DAY BANNER ═══ */
+.day-banner {
+  font-family:'Ma Shan Zheng','ZCOOL XiaoWei',cursive; font-size:1.5rem; color:var(--tea);
+  text-align:center; letter-spacing:0.3em; margin:0 0 1.5rem;
+}
+.day-banner::after { content:''; display:block; width:40px; height:1px; background:var(--gold); margin:0.4rem auto 0; }
+
+/* ═══ TIMELINE ═══ */
+.tl { position:relative; padding-left:1.5rem; }
+.tl::before { content:''; position:absolute; left:5px; top:0; bottom:0; width:1px; background:linear-gradient(to bottom,var(--tea-light) 0%,var(--gold) 60%,transparent 100%); }
+.tl-item { position:relative; margin-bottom:1.8rem; padding-left:1.5rem; }
+.tl-item::before { content:''; position:absolute; left:-1.5rem; top:0.55rem; width:8px; height:8px; border-radius:50%; background:var(--paper); border:2px solid var(--tea); transform:translateX(4px); z-index:1; }
+.tl-item.day-start::before { width:13px; height:13px; background:var(--tea); border:none; box-shadow:0 0 0 4px rgba(139,105,20,0.12); transform:translateX(1.5px); }
+.tl-time { font-size:0.7rem; letter-spacing:0.25em; color:var(--tea); font-weight:600; margin-bottom:0.1rem; }
+.tl-title { font-size:1rem; font-weight:600; color:var(--ink); margin-bottom:0.1rem; }
+.tl-desc { font-size:0.8rem; color:var(--ink-soft); line-height:1.75; }
+
+/* ═══ HIGHLIGHT CARDS ═══ */
+.cards { display:flex; flex-direction:column; gap:0.7rem; }
+@media(min-width:640px){ .cards{display:grid; grid-template-columns:1fr 1fr;} }
+
+.card {
+  background:rgba(255,255,255,0.45); border:1px solid rgba(196,163,90,0.12);
+  padding:1.3rem 1.1rem; position:relative; overflow:hidden;
+  transition:border-color 0.5s, box-shadow 0.5s; cursor:default;
+  -webkit-tap-highlight-color:transparent;
+}
+.card::before {
+  content:''; position:absolute; top:0; left:0; width:3px; height:0;
+  background:linear-gradient(to bottom,var(--tea-light),var(--gold-bright));
+  transition:height 0.5s var(--ease-smooth); z-index:2;
+}
+.card:active::before, .card:hover::before { height:100%; }
+
+/* Gold sweep */
+.card::after {
+  content:''; position:absolute; top:0; left:-100%; width:60%; height:100%; z-index:1;
+  background:linear-gradient(90deg,transparent,rgba(224,200,120,0.12),transparent);
+  transition:left 0.6s var(--ease-smooth);
+}
+.card:active::after, .card:hover::after { left:120%; }
+
+.card-icon { font-size:1.8rem; margin-bottom:0.5rem; display:block; position:relative; z-index:2; }
+.card h3 { font-size:0.95rem; font-weight:600; color:var(--ink); margin-bottom:0.3rem; position:relative; z-index:2; }
+.card p { font-size:0.78rem; color:var(--ink-soft); line-height:1.75; position:relative; z-index:2; }
+
+/* ═══ CONTACT ═══ */
+.contact-card {
+  background:rgba(255,255,255,0.5); border:1px solid rgba(196,163,90,0.18);
+  padding:1.6rem; max-width:360px; width:100%; margin:0 auto;
+  box-shadow:0 8px 40px rgba(0,0,0,0.04);
+}
+.contact-card .r { font-size:0.82rem; color:var(--ink-soft); margin-bottom:0.4rem; line-height:1.8; }
+.contact-card .r strong { color:var(--ink); font-weight:600; }
+.contact-card .r.sub { font-size:0.7rem; margin-top:0.4rem; }
+
+/* ═══ FOOTER ═══ */
+.footer { text-align:center; padding:2rem; font-size:0.65rem; color:var(--ink-soft); opacity:0.5; letter-spacing:0.18em; position:relative; z-index:1; }
+
+/* ═══ TOUCH RIPPLE ═══ */
+.touch-ripple {
+  position:fixed; border-radius:50%; z-index:9998; pointer-events:none;
+  border:1.5px solid var(--gold);
+  animation:rippleOut 0.9s ease-out forwards;
+}
+@keyframes rippleOut {
+  0%{width:0;height:0;opacity:0.8;transform:translate(-50%,-50%) scale(0)}
+  100%{width:100px;height:100px;opacity:0;transform:translate(-50%,-50%) scale(1)}
+}
+
+/* ═══ SECTION BG IMAGES ═══ */
+.section-bg-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; pointer-events:none; z-index:1;
+  mix-blend-mode:multiply;
+}
+.section-bg-img.ink-wash {
+  opacity:0.12; filter:saturate(0.1) brightness(0.9);
+}
+.section-bg-img.tea-field {
+  opacity:0.07; filter:saturate(0) brightness(0.85);
+}
+.section-bg-img.incense {
+  opacity:0.09; filter:saturate(0) brightness(0.8) blur(1px);
+}
+.section-bg-img.teaware {
+  opacity:0.05; filter:saturate(0.1) brightness(0.9);
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:380px){ .snap-section{padding:1.8rem 1rem} }
+@media(min-width:768px){ .section-inner{max-width:520px} }
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+<canvas id="particle-canvas"></canvas>
+<div class="scroll-ribbon" id="ribbon"></div>
+
+<div class="scroll-container" id="scrollContainer">
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="snap-section hero-section" data-section="hero">
+  <div class="parallax-sky" id="parallaxSky"></div>
+  <img class="section-bg-img ink-wash" src="https://images.unsplash.com/photo-1762114974371-898c0cb649d4?w=1200&fm=jpg" alt="" loading="lazy" decoding="async">
+  <div class="parallax-mountains" id="parallaxMountains"></div>
+  <div class="parallax-mist" id="parallaxMist"></div>
+
+  <div class="hero-content">
+    <div class="seal-wrap"><div class="seal">禅</div></div>
+    <div class="hero-tag">隐湖云舍 · 灵隐问禅</div>
+    <h1 class="hero-title">
+      <span class="char-reveal" style="animation-delay:0.7s">灵</span><span class="char-reveal" style="animation-delay:0.85s">隐</span><span class="char-reveal" style="animation-delay:1.0s">问</span><span class="char-reveal" style="animation-delay:1.15s">禅</span>
+    </h1>
+    <p class="hero-subtitle">杭州隐湖云舍 · 高客服务发布会</p>
+    <div class="hero-line"></div>
+    <p class="hero-info">二零二六年五月 · 两天一晚<br>西湖龙井路 · 大家的家隐湖云舍<br><em>仅限 25 – 30 席</em></p>
+  </div>
+
+  <div class="scroll-cue"><span>展开卷轴</span><div class="line"></div></div>
+</section>
+
+<!-- ═══════════ 导语 ═══════════ -->
+<section class="snap-section intro-section" data-section="intro">
+  <div class="section-watermark">壹</div>
+  <div class="section-inner">
+    <p class="intro-quote">
+      提竹篓入百亩茶园<br>指尖掐下春日的嫩绿<br>
+      暮时沐手抄经<br>晨起<em>灵隐内堂</em>问禅<br>
+      在西湖山水与茶香之间<br>
+      备好了一场<em>安静而有份量</em>的相聚
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════ D1 ═══════════ -->
+<section class="snap-section" data-section="d1">
+  <img class="section-bg-img tea-field" src="https://images.unsplash.com/photo-1544451822-38e32b887c08?w=800&fm=jpg" alt="" loading="lazy" decoding="async">
+  <div class="section-watermark">贰</div>
+  <div class="section-inner">
+    <div class="section-label">行程概览</div>
+    <h2 class="section-title">两日 · 禅茶记</h2>
+    <p class="section-desc">从茶园到禅堂，从暮鼓到晨钟</p>
+
+    <svg class="brush-divider" viewBox="0 0 200 12"><path class="brush-path" d="M10,6 Q50,2 100,6 Q150,10 190,6"/></svg>
+
+    <div class="day-banner">— 第一日 · 茶 —</div>
+
+    <div class="tl">
+      <div class="tl-item day-start reveal"><div class="tl-time">13:00 – 14:00</div><div class="tl-title">抵达 · 洗尘礼</div><div class="tl-desc">一杯西湖龙井行洗尘之礼，颂钵音波中褪去旅途疲惫，入住茶田环抱的庭院居所。</div></div>
+      <div class="tl-item reveal"><div class="tl-time">15:00 – 17:00</div><div class="tl-title">茶田课堂 · 从采到品</div><div class="tl-desc">提竹篓进百亩茶园，在茶农指导下采茶、炒茶、品茶。专业摄影师全程跟拍，记录茶园画卷中的每一帧。</div></div>
+      <div class="tl-item reveal"><div class="tl-time">17:30 – 18:30</div><div class="tl-title">春季桌宴</div><div class="tl-desc">四时记餐厅主厨以杭州时令入菜 —— 龙井虾仁、腌笃鲜、春笋步鱼。杭帮融合，顺时而食。</div></div>
+      <div class="tl-item reveal"><div class="tl-time">19:00 – 20:00</div><div class="tl-title">沐手抄经 · 茶禅一味</div><div class="tl-desc">沐手、磨墨、提笔。以当季龙井相伴，在经卷的横竖撇捺间收摄心神。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ D2 ═══════════ -->
+<section class="snap-section" data-section="d2">
+  <img class="section-bg-img incense" src="https://images.unsplash.com/photo-1551690935-a9e6f0a7e788?w=800&fm=jpg" alt="" loading="lazy" decoding="async">
+  <div class="section-watermark">叁</div>
+  <div class="section-inner">
+    <div class="section-label">行程概览</div>
+    <div class="day-banner">— 第二日 · 禅 —</div>
+
+    <div class="tl">
+      <div class="tl-item day-start reveal"><div class="tl-time">08:30</div><div class="tl-title">晨起 · 养生早膳</div><div class="tl-desc">在茶田晨雾中醒来，享用养生早餐。退房后统一乘车前往灵隐寺。</div></div>
+      <div class="tl-item reveal"><div class="tl-time">09:30 – 11:00</div><div class="tl-title">灵隐内堂 · 专属礼佛</div><div class="tl-desc">提前预约，专人引导进入灵隐寺内堂——非对普通游客开放的区域。在千年古刹最深处燃香礼佛，获赠灵隐寺定制「问禅」瓷杯。</div></div>
+      <div class="tl-item reveal"><div class="tl-time">11:00 – 11:45</div><div class="tl-title">服务发布会 · 茶叙对谈</div><div class="tl-desc">移步灵隐寺旁素斋馆，围坐品茗。以朋友对谈的方式，在禅意余韵中介绍最新服务体系与客户权益。不设投影，不拿话筒——只有好茶与真诚分享。</div></div>
+      <div class="tl-item reveal"><div class="tl-time">11:45 – 12:45</div><div class="tl-title">素斋午宴 · 返程</div><div class="tl-desc">享用灵隐素斋。菌菇、时蔬、豆腐、面点——简单食材，用心料理。领取隐湖云舍定制龙井茶礼盒，各自返程。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 亮点 ═══════════ -->
+<section class="snap-section" data-section="highlights">
+  <div class="section-watermark">肆</div>
+  <div class="section-inner">
+    <div class="section-label">活动亮点</div>
+    <h2 class="section-title">四个不可复制的体验</h2>
+    <p class="section-desc">每一次都是独一无二的记忆</p>
+
+    <svg class="brush-divider" viewBox="0 0 200 12"><path class="brush-path" d="M10,6 Q50,2 100,6 Q150,10 190,6"/></svg>
+
+    <div class="cards">
+      <div class="card reveal"><span class="card-icon">🍃</span><h3>沉浸式茶文化体验</h3><p>不是参观茶园，而是成为茶农。亲手采茶、炒茶、品茶，两小时走完从树梢到杯中的完整旅程。专业摄影师记录每一帧。</p></div>
+      <div class="card reveal"><span class="card-icon">🏛</span><h3>灵隐寺内堂专属通道</h3><p>非对普通游客开放的内堂区域，专属预约进入。在千年古刹最深处礼佛，获赠灵隐寺定制「问禅」瓷杯——一份带得走的禅意。</p></div>
+      <div class="card reveal"><span class="card-icon">✍️</span><h3>茶禅一味 · 沐手抄经</h3><p>暮色中沐手、研墨、提笔。以当季龙井相伴，一笔一划间静心。一小时很短，但那份宁静会在记忆中停留很久。</p></div>
+      <div class="card reveal"><span class="card-icon">🏡</span><h3>宋韵庭院 · 三面茶田</h3><p>隐湖云舍位于西湖核心景区，三面茶田森林环抱，距黄龙商圈仅5分钟车程。离尘不离城，一半烟火一半自然。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 联络 ═══════════ -->
+<section class="snap-section" data-section="contact">
+  <img class="section-bg-img teaware" src="https://images.unsplash.com/photo-1689067468083-2e5f44e43f40?w=600&fm=jpg" alt="" loading="lazy" decoding="async">
+  <div class="section-watermark">伍</div>
+  <div class="section-inner" style="text-align:center">
+    <div class="section-label">地点与联络</div>
+    <h2 class="section-title" style="font-size:2rem;">期待您的到来</h2>
+    <p class="section-desc">席位有限，敬请提前预约</p>
+
+    <div class="gold-rule"></div>
+
+    <div class="contact-card reveal">
+      <div class="r"><strong>活动地点</strong></div>
+      <div class="r">大家的家 · 隐湖云舍旅居社区</div>
+      <div class="r">杭州市西湖区龙井路</div>
+      <div class="r" style="margin-top:0.4rem;"><strong>预订 & 咨询</strong></div>
+      <div class="r">电话：0571-8891 9111</div>
+      <div class="r">邮箱：gaofuguanjia@126.com</div>
+      <div class="r sub">距黄龙商圈 2.5km &nbsp;/&nbsp; 萧山机场 40km<br>杭州东站 40min &nbsp;/&nbsp; 杭州西站 30min</div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">© 2026 大家的家 · 隐湖云舍 旅居社区</footer>
+
+</div><!-- /scroll-container -->
+
+<script>
+(function() {
+  'use strict';
+
+  // ═══ CANVAS PARTICLE ENGINE ═══
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  window.addEventListener('orientationchange', () => setTimeout(resize, 100));
+
+  const particles = [];
+  const MAX = 50;
+
+  class Particle {
+    constructor(type) {
+      this.type = type; // 'ink' | 'gold' | 'tea' | 'smoke'
+      this.reset();
+    }
+    reset() {
+      switch(this.type) {
+        case 'ink':
+          this.x = Math.random() * W;
+          this.y = Math.random() * H * 0.7 + H * 0.3;
+          this.r = Math.random() * 2 + 1;
+          this.maxR = Math.random() * 30 + 15;
+          this.growSpeed = Math.random() * 0.3 + 0.1;
+          this.life = 1;
+          this.decay = Math.random() * 0.003 + 0.001;
+          break;
+        case 'gold':
+          this.x = Math.random() * W;
+          this.y = Math.random() * H;
+          this.r = Math.random() * 2 + 0.5;
+          this.vx = (Math.random() - 0.5) * 0.3;
+          this.vy = -(Math.random() * 0.4 + 0.1);
+          this.life = Math.random() * 0.6 + 0.4;
+          this.opacity = Math.random() * 0.5 + 0.3;
+          break;
+        case 'tea':
+          this.x = Math.random() * W;
+          this.y = -10;
+          this.rx = Math.random() * 7 + 4;
+          this.ry = Math.random() * 3 + 1.5;
+          this.angle = Math.random() * Math.PI * 2;
+          this.rotSpeed = (Math.random() - 0.5) * 0.03;
+          this.vy = Math.random() * 0.5 + 0.2;
+          this.vx = (Math.random() - 0.5) * 0.5;
+          this.wobble = Math.random() * 0.02;
+          this.life = 1;
+          this.decay = Math.random() * 0.002 + 0.001;
+          break;
+        case 'smoke':
+          this.x = Math.random() * W;
+          this.y = H + 10;
+          this.r = Math.random() * 3 + 1;
+          this.vy = -(Math.random() * 0.3 + 0.1);
+          this.vx = (Math.random() - 0.5) * 0.4;
+          this.growSpeed = Math.random() * 0.15 + 0.05;
+          this.life = 1;
+          this.decay = Math.random() * 0.004 + 0.002;
+          break;
+      }
+    }
+    update(speed) {
+      switch(this.type) {
+        case 'ink':
+          if (this.r < this.maxR) this.r += this.growSpeed;
+          this.life -= this.decay * (1 + speed * 0.1);
+          if (this.life <= 0) this.reset();
+          break;
+        case 'gold':
+          this.x += this.vx; this.y += this.vy;
+          this.life -= 0.001;
+          if (this.life <= 0 || this.y < -10) this.reset();
+          break;
+        case 'tea':
+          this.x += this.vx + Math.sin(this.angle) * 0.3;
+          this.y += this.vy;
+          this.angle += this.rotSpeed;
+          this.life -= this.decay;
+          if (this.life <= 0 || this.y > H + 20) this.reset();
+          break;
+        case 'smoke':
+          this.x += this.vx; this.y += this.vy;
+          this.r += this.growSpeed;
+          this.life -= this.decay;
+          if (this.life <= 0 || this.y < -20) this.reset();
+          break;
+      }
+    }
+    draw(ctx) {
+      const alpha = Math.max(0, this.life);
+      switch(this.type) {
+        case 'ink':
+          ctx.fillStyle = `rgba(26,26,26,${alpha * 0.12})`;
+          ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2); ctx.fill();
+          break;
+        case 'gold':
+          ctx.fillStyle = `rgba(224,200,120,${alpha * this.opacity})`;
+          ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2); ctx.fill();
+          ctx.fillStyle = `rgba(255,240,200,${alpha * this.opacity * 0.5})`;
+          ctx.beginPath(); ctx.arc(this.x-0.5, this.y-0.5, this.r*0.5, 0, Math.PI*2); ctx.fill();
+          break;
+        case 'tea':
+          ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.angle);
+          ctx.fillStyle = `rgba(122,154,126,${alpha * 0.25})`;
+          ctx.beginPath(); ctx.ellipse(0, 0, this.rx, this.ry, 0, 0, Math.PI*2); ctx.fill();
+          ctx.strokeStyle = `rgba(90,122,94,${alpha * 0.18})`;
+          ctx.lineWidth = 0.5; ctx.stroke();
+          ctx.restore();
+          break;
+        case 'smoke':
+          const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r);
+          grad.addColorStop(0, `rgba(200,195,185,${alpha * 0.12})`);
+          grad.addColorStop(1, `rgba(200,195,185,0)`);
+          ctx.fillStyle = grad;
+          ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2); ctx.fill();
+          break;
+      }
+    }
+  }
+
+  // Init particles
+  for (let i = 0; i < MAX; i++) {
+    const types = ['gold','gold','gold','gold','tea','tea','smoke','smoke','ink','ink'];
+    particles.push(new Particle(types[Math.floor(Math.random() * types.length)]));
+  }
+
+  let lastScrollY = 0, scrollSpeed = 0;
+  const scrollContainer = document.getElementById('scrollContainer');
+
+  function getScrollTop() { return scrollContainer.scrollTop; }
+
+  function animate() {
+    const st = getScrollTop();
+    scrollSpeed = Math.abs(st - lastScrollY);
+    lastScrollY = st;
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Spawn ink on fast scroll
+    if (scrollSpeed > 3 && Math.random() < 0.3) {
+      for (const p of particles) {
+        if (p.type === 'ink' && p.life <= 0.05) { p.reset(); p.life = 1; break; }
+      }
+    }
+
+    for (const p of particles) {
+      p.update(scrollSpeed);
+      p.draw(ctx);
+    }
+
+    // Extra gold spawn near top for constant shimmer
+    if (Math.random() < 0.08) {
+      for (const p of particles) {
+        if (p.type === 'gold' && p.life <= 0.2 && p.y < 0) { p.reset(); break; }
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // ═══ SCROLL RIBBON ═══
+  const ribbon = document.getElementById('ribbon');
+  scrollContainer.addEventListener('scroll', () => {
+    const st = scrollContainer.scrollTop;
+    const dh = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+    ribbon.style.width = dh > 0 ? (st / dh * 100) + '%' : '0%';
+  });
+
+  // ═══ INK REVEAL ON SNAP SECTIONS ═══
+  const snapObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.snap-section').forEach(el => snapObserver.observe(el));
+
+  // Initial reveal for hero
+  document.querySelector('.hero-section').classList.add('revealed');
+
+  // ═══ SVG BRUSH STROKE ANIMATION ═══
+  const brushObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('drawn');
+    });
+  }, { threshold: 0.6 });
+
+  document.querySelectorAll('.brush-divider').forEach(el => brushObserver.observe(el));
+
+  // ═══ TIMELINE & CARD REVEAL ═══
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('on');
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.reveal, .tl-item, .card').forEach(el => revealObserver.observe(el));
+  document.querySelectorAll('.tl-item').forEach((el,i) => { el.style.transitionDelay = (i%4)*0.08+'s'; });
+  document.querySelectorAll('.card').forEach((el,i) => { el.style.transitionDelay = i*0.08+'s'; });
+
+  // ═══ TOUCH RIPPLE ═══
+  document.addEventListener('touchstart', (e) => {
+    if (e.touches.length > 1) return;
+    const ripple = document.createElement('div');
+    ripple.className = 'touch-ripple';
+    ripple.style.left = e.touches[0].clientX + 'px';
+    ripple.style.top = e.touches[0].clientY + 'px';
+    document.body.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove());
+    setTimeout(() => { if (ripple.parentNode) ripple.remove(); }, 1000);
+  }, { passive: true });
+
+  // ═══ PARALLAX ═══
+  const sky = document.getElementById('parallaxSky');
+  const mountains = document.getElementById('parallaxMountains');
+  const mist = document.getElementById('parallaxMist');
+
+  scrollContainer.addEventListener('scroll', () => {
+    const heroSection = document.querySelector('.hero-section');
+    if (!heroSection) return;
+    const rect = heroSection.getBoundingClientRect();
+    // Only apply parallax when hero is visible
+    if (rect.bottom > 0 && rect.top < window.innerHeight) {
+      const offset = -rect.top;
+      if (sky) sky.style.transform = `translateY(${offset * 0.02}px)`;
+      if (mountains) mountains.style.transform = `translateY(${offset * 0.06}px)`;
+      if (mist) mist.style.transform = `translateY(${offset * 0.12}px)`;
+    }
+  });
+
+  // ═══ INIT ═══
+  // Mark all snap sections as ready for ink reveal
+  document.querySelectorAll('.snap-section').forEach(el => {
+    if (el.classList.contains('hero-section')) el.classList.add('revealed');
+  });
+
+})();
+</script>
+
+</body>
+</html>
