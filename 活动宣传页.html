@@ -265,6 +265,38 @@ body {
   opacity:0.15; filter:saturate(0.7) brightness(0.9);
 }
 
+/* ═══ PRELOADER ═══ */
+#preloader {
+  position:fixed; inset:0; z-index:99999; background:var(--paper);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  transition:opacity 0.5s var(--ease-smooth), visibility 0.5s;
+}
+#preloader.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+
+.preloader-pct {
+  font-family:'Ma Shan Zheng','ZCOOL XiaoWei',cursive;
+  font-size:2.4rem; color:var(--tea); margin-bottom:1.2rem;
+}
+
+.preloader-bar-wrap {
+  width:180px; height:3px; background:rgba(139,105,20,0.12);
+  border-radius:3px; overflow:hidden;
+}
+.preloader-bar {
+  height:100%; width:0%; border-radius:3px;
+  background:linear-gradient(90deg,var(--tea-light),var(--gold-bright));
+  position:relative; transition:width 0.3s linear;
+}
+.preloader-bar::after {
+  content:''; position:absolute; top:0; right:0; width:40px; height:100%;
+  background:linear-gradient(90deg,transparent,rgba(247,244,237,0.6));
+  animation:barWave 0.8s ease-in-out infinite;
+}
+@keyframes barWave {
+  0%,100%{opacity:0.3; transform:translateX(0)}
+  50%{opacity:0.9; transform:translateX(-20px)}
+}
+
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:380px){ .snap-section{padding:1.8rem 1rem} }
 @media(min-width:768px){ .section-inner{max-width:520px} }
@@ -275,6 +307,11 @@ body {
 </style>
 </head>
 <body>
+
+<div id="preloader">
+  <div class="preloader-pct" id="preloaderPct">0%</div>
+  <div class="preloader-bar-wrap"><div class="preloader-bar" id="preloaderBar"></div></div>
+</div>
 
 <div class="noise-overlay"></div>
 <canvas id="particle-canvas"></canvas>
@@ -406,6 +443,39 @@ body {
 <script>
 (function() {
   'use strict';
+
+  // ═══ PRELOADER ═══
+  const preloader = document.getElementById('preloader');
+  const preloaderBar = document.getElementById('preloaderBar');
+  const preloaderPct = document.getElementById('preloaderPct');
+  const images = Array.from(document.querySelectorAll('img[src]'));
+  const total = images.length;
+  let loaded = 0;
+
+  function updateProgress() {
+    const pct = total > 0 ? Math.round((loaded / total) * 100) : 100;
+    preloaderBar.style.width = pct + '%';
+    preloaderPct.textContent = pct + '%';
+    if (loaded >= total) hidePreloader();
+  }
+
+  function hidePreloader() {
+    if (!preloader || preloader.classList.contains('hidden')) return;
+    preloader.classList.add('hidden');
+    setTimeout(() => { if (preloader.parentNode) preloader.remove(); }, 600);
+  }
+
+  if (total === 0) { updateProgress(); }
+  else {
+    images.forEach(img => {
+      if (img.complete && img.naturalWidth > 0) { loaded++; updateProgress(); }
+      else {
+        img.addEventListener('load', () => { loaded++; updateProgress(); }, { once: true });
+        img.addEventListener('error', () => { loaded++; updateProgress(); }, { once: true });
+      }
+    });
+  }
+  setTimeout(() => hidePreloader(), 10000);
 
   // ═══ CANVAS PARTICLE ENGINE ═══
   const canvas = document.getElementById('particle-canvas');
