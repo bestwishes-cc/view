@@ -22,6 +22,40 @@ WHITE = HexColor('#ffffff')
 # 注册字体
 pdfmetrics.registerFont(TTFont('STHeiti', '/System/Library/Fonts/STHeiti Medium.ttc'))
 
+def draw_image_with_aspect(c, image_path, x, y, width, height):
+    """绘制图片，保持宽高比"""
+    try:
+        img = Image.open(image_path)
+        img_width, img_height = img.size
+
+        # 计算缩放比例
+        ratio = min(width / img_width, height / img_height)
+        new_width = img_width * ratio
+        new_height = img_height * ratio
+
+        # 居中绘制
+        draw_x = x + (width - new_width) / 2
+        draw_y = y + (height - new_height) / 2
+
+        c.drawImage(image_path, draw_x, draw_y, new_width, new_height)
+        return True
+    except Exception as e:
+        print(f"图片绘制失败 {image_path}: {e}")
+        return False
+
+def draw_gradient_overlay(c, color, alpha_start, alpha_end, y_start, y_height):
+    """绘制渐变遮罩"""
+    steps = 20
+    step_height = y_height / steps
+
+    for i in range(steps):
+        alpha = alpha_start + (alpha_end - alpha_start) * (i / steps)
+        c.setFillColor(color)
+        c.setFillAlpha(alpha)
+        c.rect(0, y_start + i * step_height, PAGE_WIDTH, step_height, fill=1)
+
+    c.setFillAlpha(1)
+
 def create_pdf():
     """创建PDF文档"""
     output_path = "output/茶禅雅集-老友节高客服务发布会.pdf"
@@ -43,26 +77,10 @@ def create_pdf():
 def create_cover_page(c):
     """创建封面页"""
     # 绘制背景图片
-    try:
-        img = Image.open("assets/images/cover.jpg")
-        img_width, img_height = img.size
-        ratio = min(PAGE_WIDTH / img_width, PAGE_HEIGHT / img_height)
-        new_width = img_width * ratio
-        new_height = img_height * ratio
-        x = (PAGE_WIDTH - new_width) / 2
-        y = (PAGE_HEIGHT - new_height) / 2
-        c.drawImage("assets/images/cover.jpg", x, y, new_width, new_height)
-    except Exception as e:
-        print(f"封面图片加载失败: {e}")
-        # 使用纯色背景
-        c.setFillColor(DARK_BLUE)
-        c.rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT, fill=1)
+    draw_image_with_aspect(c, "assets/images/cover.jpg", 0, 0, PAGE_WIDTH, PAGE_HEIGHT)
 
     # 绘制渐变遮罩
-    c.setFillColor(DARK_BLUE)
-    c.setFillAlpha(0.7)
-    c.rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT, fill=1)
-    c.setFillAlpha(1)
+    draw_gradient_overlay(c, DARK_BLUE, 0.3, 0.9, 0, PAGE_HEIGHT)
 
     # 顶部徽章
     badge_width = 1.5 * inch
