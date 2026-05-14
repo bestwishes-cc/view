@@ -42,7 +42,65 @@ def create_pdf():
 
 def create_cover_page(c):
     """创建封面页"""
-    # TODO: 实现封面页
+    # 绘制背景图片
+    try:
+        img = Image.open("assets/images/cover.jpg")
+        img_width, img_height = img.size
+        ratio = min(PAGE_WIDTH / img_width, PAGE_HEIGHT / img_height)
+        new_width = img_width * ratio
+        new_height = img_height * ratio
+        x = (PAGE_WIDTH - new_width) / 2
+        y = (PAGE_HEIGHT - new_height) / 2
+        c.drawImage("assets/images/cover.jpg", x, y, new_width, new_height)
+    except Exception as e:
+        print(f"封面图片加载失败: {e}")
+        # 使用纯色背景
+        c.setFillColor(DARK_BLUE)
+        c.rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT, fill=1)
+
+    # 绘制渐变遮罩
+    c.setFillColor(DARK_BLUE)
+    c.setFillAlpha(0.7)
+    c.rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT, fill=1)
+    c.setFillAlpha(1)
+
+    # 顶部徽章
+    badge_width = 1.5 * inch
+    badge_height = 0.4 * inch
+    badge_x = (PAGE_WIDTH - badge_width) / 2
+    badge_y = PAGE_HEIGHT - 1 * inch
+
+    c.setFillColor(GOLD)
+    c.roundRect(badge_x, badge_y, badge_width, badge_height, 10, fill=1)
+
+    c.setFillColor(WHITE)
+    c.setFont('STHeiti', 12)
+    text_x = PAGE_WIDTH / 2
+    text_y = badge_y + badge_height / 2 - 4
+    c.drawCentredString(text_x, text_y, "尊享邀约")
+
+    # 品牌标识
+    c.setFillColor(GOLD)
+    c.setFont('STHeiti', 14)
+    c.drawCentredString(PAGE_WIDTH / 2, PAGE_HEIGHT - 2.5 * inch, "大家的家 · 隐湖云舍")
+
+    # 主标题
+    c.setFillColor(WHITE)
+    c.setFont('STHeiti', 36)
+    c.drawCentredString(PAGE_WIDTH / 2, PAGE_HEIGHT - 4 * inch, "茶禅雅集")
+
+    # 副标题
+    c.setFont('STHeiti', 18)
+    c.drawCentredString(PAGE_WIDTH / 2, PAGE_HEIGHT - 4.8 * inch, "老友节高客服务发布会")
+
+    # 底部信息
+    c.setFillColor(WHITE)
+    c.setFillAlpha(0.8)
+    c.setFont('STHeiti', 12)
+    c.drawCentredString(PAGE_WIDTH / 2, 1.5 * inch, "2026年5月29-30日")
+    c.drawCentredString(PAGE_WIDTH / 2, 1.2 * inch, "杭州 · 西湖畔")
+    c.setFillAlpha(1)
+
     c.showPage()
 
 def create_overview_page(c):
