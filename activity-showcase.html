@@ -313,6 +313,35 @@ body {
   50%{opacity:0.9; transform:translateX(-20px)}
 }
 
+/* ═══ SOLID SHAPE BACKGROUNDS ═══ */
+.hero-content {
+  position:relative; z-index:3; max-width:400px; padding:2rem 1.2rem;
+  background:rgba(247,244,237,0.85);
+  border:1px solid rgba(196,163,90,0.2);
+  box-shadow:0 8px 32px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.05);
+  border-radius:2px;
+}
+
+.intro-quote-wrap {
+  position:relative; z-index:2;
+  background:rgba(247,244,237,0.85);
+  border:1px solid rgba(196,163,90,0.2);
+  box-shadow:0 8px 32px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.05);
+  border-radius:2px;
+  padding:2rem 1.5rem;
+  max-width:400px; margin:0 auto;
+}
+
+.brand-content-wrap {
+  position:relative; z-index:2;
+  background:rgba(247,244,237,0.85);
+  border:1px solid rgba(196,163,90,0.2);
+  box-shadow:0 8px 32px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.05);
+  border-radius:2px;
+  padding:2rem 1.5rem;
+  max-width:420px; margin:0 auto;
+}
+
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:380px){ .snap-section{padding:1.8rem 1rem} }
 @media(min-width:768px){ .section-inner{max-width:520px} }
@@ -362,12 +391,14 @@ body {
   <img class="section-bg-img intro-lake" src="https://images.unsplash.com/photo-1697553308664-5aed18530490?w=1200&fm=jpg" alt="" loading="lazy" decoding="async">
   <div class="section-watermark">壹</div>
   <div class="section-inner">
-    <p class="intro-quote">
-      提竹篓入百亩茶园<br>指尖掐下春日的嫩绿<br>
-      暮时沐手抄经<br>晨起<em>灵隐古刹</em>探秘<br>
-      在西湖山水与茶香之间<br>
-      备好了一场<em>安静而有份量</em>的相聚
-    </p>
+    <div class="intro-quote-wrap">
+      <p class="intro-quote">
+        提竹篓入百亩茶园<br>指尖掐下春日的嫩绿<br>
+        暮时沐手抄经<br>晨起<em>灵隐古刹</em>探秘<br>
+        在西湖山水与茶香之间<br>
+        备好了一场<em>安静而有份量</em>的相聚
+      </p>
+    </div>
   </div>
 </section>
 
@@ -431,23 +462,25 @@ body {
   <img class="section-bg-img temple" src="https://images.unsplash.com/photo-1701070658926-5a7844890fb6?w=1200&fm=jpg" alt="" loading="lazy" decoding="async">
   <div class="section-watermark">肆</div>
   <div class="section-inner" style="text-align:center;">
-    <div class="section-label">高端旅居</div>
-    <h2 class="section-title">隐湖云舍</h2>
-    <p class="section-desc">大家的家 · 高端旅居品牌</p>
+    <div class="brand-content-wrap">
+      <div class="section-label">高端旅居</div>
+      <h2 class="section-title">隐湖云舍</h2>
+      <p class="section-desc">大家的家 · 高端旅居品牌</p>
 
-    <svg class="brush-divider" viewBox="0 0 200 12"><path class="brush-path" d="M10,6 Q50,2 100,6 Q150,10 190,6"/></svg>
+      <svg class="brush-divider" viewBox="0 0 200 12"><path class="brush-path" d="M10,6 Q50,2 100,6 Q150,10 190,6"/></svg>
 
-    <p style="font-size:1.2rem; color:var(--ink-soft); line-height:2; margin-bottom:1.5rem; font-weight:600; text-shadow:0 1px 2px rgba(247,244,237,0.5);">
-      西湖畔的美学宿集<br>
-      宋韵园林的现代演绎<br>
-      三面茶田森林环抱<br>
-      离尘不离城的理想之地
-    </p>
+      <p style="font-size:1.2rem; color:var(--ink-soft); line-height:2; margin-bottom:1.5rem; font-weight:600; text-shadow:0 1px 2px rgba(247,244,237,0.5);">
+        西湖畔的美学宿集<br>
+        宋韵园林的现代演绎<br>
+        三面茶田森林环抱<br>
+        离尘不离城的理想之地
+      </p>
 
-    <div class="gold-rule"></div>
+      <div class="gold-rule"></div>
 
-    <div style="font-size:1rem; color:var(--tea); letter-spacing:0.2em; margin-top:1rem; font-weight:700; text-shadow:0 1px 2px rgba(247,244,237,0.5);">
-      距黄龙商圈 2.5km · 萧山机场 40km
+      <div style="font-size:1rem; color:var(--tea); letter-spacing:0.2em; margin-top:1rem; font-weight:700; text-shadow:0 1px 2px rgba(247,244,237,0.5);">
+        距黄龙商圈 2.5km · 萧山机场 40km
+      </div>
     </div>
   </div>
 </section>
