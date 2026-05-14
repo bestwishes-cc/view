@@ -165,7 +165,62 @@ def create_overview_page(c):
 
 def create_tea_page(c):
     """创建茶韵体验页"""
-    # TODO: 实现茶韵体验页
+    # 绘制背景图片
+    try:
+        c.drawImage("assets/images/tea.jpg", 0, 0, PAGE_WIDTH, PAGE_HEIGHT)
+    except Exception as e:
+        print(f"茶韵页图片加载失败: {e}")
+        c.setFillColor(LIGHT_GRAY)
+        c.rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT, fill=1)
+
+    # 绘制遮罩
+    c.setFillColor(DARK_BLUE)
+    c.setFillAlpha(0.6)
+    c.rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT, fill=1)
+    c.setFillAlpha(1)
+
+    # 标题区域
+    title_bg_height = 1.5 * inch
+    title_bg_y = PAGE_HEIGHT - 2 * inch
+
+    c.setFillColor(DARK_BLUE)
+    c.rect(0, title_bg_y, PAGE_WIDTH, title_bg_height, fill=1)
+
+    # 小标题
+    c.setFillColor(GOLD)
+    c.setFont('STHeiti', 12)
+    c.drawCentredString(PAGE_WIDTH / 2, title_bg_y + title_bg_height - 0.5 * inch, "第一日 · 茶")
+
+    # 主标题
+    c.setFillColor(WHITE)
+    c.setFont('STHeiti', 24)
+    c.drawCentredString(PAGE_WIDTH / 2, title_bg_y + 0.3 * inch, "尊享茶道体验")
+
+    # 描述内容
+    c.setFillColor(WHITE)
+    c.setFont('STHeiti', 14)
+
+    descriptions = [
+        "宋韵点茶",
+        "田园雅趣",
+        "西湖春茶",
+        "",
+        "在茶园中感受自然",
+        "在茶香中品味人生"
+    ]
+
+    y_position = PAGE_HEIGHT - 4 * inch
+    for line in descriptions:
+        if line:
+            c.drawCentredString(PAGE_WIDTH / 2, y_position, line)
+        y_position -= 0.4 * inch
+
+    # 底部关键词
+    c.setFillColor(GOLD)
+    c.setFont('STHeiti', 12)
+    keywords = "茶韵 · 雅趣 · 自然 · 品味"
+    c.drawCentredString(PAGE_WIDTH / 2, 1.5 * inch, keywords)
+
     c.showPage()
 
 def create_zen_page(c):
