@@ -345,7 +345,55 @@ def create_community_page(c):
 
 def create_contact_page(c):
     """创建报名咨询页"""
-    # TODO: 实现报名咨询页
+    # 简洁背景
+    c.setFillColor(LIGHT_GRAY)
+    c.rect(0, 0, PAGE_WIDTH, PAGE_HEIGHT, fill=1)
+
+    # 顶部装饰条
+    c.setFillColor(DARK_BLUE)
+    c.rect(0, PAGE_HEIGHT - 0.5 * inch, PAGE_WIDTH, 0.5 * inch, fill=1)
+
+    # 标题区域
+    title_bg_height = 1.5 * inch
+    title_bg_y = PAGE_HEIGHT - 2.5 * inch
+
+    c.setFillColor(DARK_BLUE)
+    c.rect(0, title_bg_y, PAGE_WIDTH, title_bg_height, fill=1)
+
+    # 主标题
+    c.setFillColor(GOLD)
+    c.setFont('STHeiti', 24)
+    c.drawCentredString(PAGE_WIDTH / 2, title_bg_y + 0.5 * inch, "尊享预约")
+
+    # 副标题
+    c.setFillColor(WHITE)
+    c.setFont('STHeiti', 14)
+    c.drawCentredString(PAGE_WIDTH / 2, title_bg_y + 0.1 * inch, "名额有限，尊享预约")
+
+    # 联系信息区域
+    contact_y = PAGE_HEIGHT - 5 * inch
+
+    c.setFillColor(DARK_BLUE)
+    c.setFont('STHeiti', 16)
+    c.drawCentredString(PAGE_WIDTH / 2, contact_y, "预约咨询")
+
+    c.setFillColor(DARK_BLUE)
+    c.setFont('STHeiti', 14)
+    c.drawCentredString(PAGE_WIDTH / 2, contact_y - 0.6 * inch, "请联系您的专属顾问")
+
+    # 底部品牌信息
+    c.setFillColor(GOLD)
+    c.setFont('STHeiti', 12)
+    c.drawCentredString(PAGE_WIDTH / 2, 1.5 * inch, "大家的家 · 隐湖云舍")
+
+    c.setFillColor(DARK_BLUE)
+    c.setFont('STHeiti', 10)
+    c.drawCentredString(PAGE_WIDTH / 2, 1.1 * inch, "杭州 · 西湖畔")
+
+    # 底部装饰条
+    c.setFillColor(DARK_BLUE)
+    c.rect(0, 0, PAGE_WIDTH, 0.3 * inch, fill=1)
+
     c.showPage()
 
 if __name__ == "__main__":
