@@ -1,0 +1,126 @@
+<h2>封面设计（带大图背景）</h2>
+<p class="subtitle">全屏大图背景 + 品牌信息叠加</p>
+
+<div class="section">
+  <h3>封面布局方案</h3>
+  <div class="mockup">
+    <div class="mockup-header">封面设计（竖版 9:16）</div>
+    <div class="mockup-body">
+      <div style="background: linear-gradient(180deg, rgba(26,54,93,0.2) 0%, rgba(26,54,93,0.6) 50%, rgba(26,54,93,0.9) 100%);
+                  height: 500px;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: space-between;
+                  padding: 30px;
+                  color: white;
+                  position: relative;
+                  background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"500\"><defs><linearGradient id=\"g\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\"><stop offset=\"0%\" style=\"stop-color:%231a365d;stop-opacity:0.3\"/><stop offset=\"50%\" style=\"stop-color:%231a365d;stop-opacity:0.6\"/><stop offset=\"100%\" style=\"stop-color:%231a365d;stop-opacity:0.9\"/></linearGradient></defs><rect fill=\"url(%23g)\" width=\"400\" height=\"500\"/><text x=\"200\" y=\"250\" font-family=\"serif\" font-size=\"80\" fill=\"%23d4af37\" text-anchor=\"middle\" opacity=\"0.3\">茶</text></svg>');
+                  background-size: cover;
+                  background-position: center;">
+        <!-- 顶部品牌标识 -->
+        <div style="text-align: center;">
+          <div style="background: rgba(212,175,55,0.9); display: inline-block; padding: 8px 20px; border-radius: 20px; font-size: 12px; letter-spacing: 2px;">
+            尊享邀约
+          </div>
+        </div>
+
+        <!-- 中部标题区域 -->
+        <div style="text-align: center; margin-bottom: 40px;">
+          <div style="font-size: 14px; color: #d4af37; letter-spacing: 3px; margin-bottom: 15px;">
+            大家的家 · 隐湖云舍
+          </div>
+          <h1 style="font-size: 42px; margin: 0 0 15px 0; line-height: 1.2; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+            灵隐问禅
+          </h1>
+          <div style="font-size: 20px; opacity: 0.9; letter-spacing: 2px;">
+            老友节高客服务发布会
+          </div>
+        </div>
+
+        <!-- 底部信息 -->
+        <div style="border-top: 1px solid rgba(255,255,255,0.3); padding-top: 20px;">
+          <div style="display: flex; justify-content: space-between; font-size: 14px; opacity: 0.9;">
+            <span>2026年5月29-30日</span>
+            <span>杭州 · 西湖畔</span>
+          </div>
+          <div style="text-align: center; margin-top: 15px; font-size: 12px; opacity: 0.7; letter-spacing: 1px;">
+            两天一夜沉浸式禅意体验
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 40px;">
+  <h3>大图背景选择</h3>
+  <div class="options">
+    <div class="option" data-choice="a" onclick="toggleSelect(this)">
+      <div class="letter">A</div>
+      <div class="content">
+        <h3>茶园实景</h3>
+        <p>西湖龙井茶园，展现茶文化底蕴</p>
+        <ul>
+          <li>绿色茶园 + 采茶人</li>
+          <li>体现"茶韵"主题</li>
+          <li>清新自然氛围</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="option" data-choice="b" onclick="toggleSelect(this)">
+      <div class="letter">B</div>
+      <div class="content">
+        <h3>灵隐禅境</h3>
+        <p>灵隐寺或禅意空间，突出"禅"主题</p>
+        <ul>
+          <li>古刹、禅房、佛像</li>
+          <li>体现"问禅"主题</li>
+          <li>庄重静谧氛围</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="option" data-choice="c" onclick="toggleSelect(this)">
+      <div class="letter">C</div>
+      <div class="content">
+        <h3>隐湖云舍</h3>
+        <p>社区环境实景，展现高端旅居品质</p>
+        <ul>
+          <li>园林、建筑、湖景</li>
+          <li>体现"隐湖"品牌</li>
+          <li>奢华雅致氛围</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="option" data-choice="d" onclick="toggleSelect(this)">
+      <div class="letter">D</div>
+      <div class="content">
+        <h3>意境融合</h3>
+        <p>多元素融合，营造综合意境</p>
+        <ul>
+          <li>茶具 + 禅意 + 园林</li>
+          <li>体现整体调性</li>
+          <li>艺术化呈现</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 40px;">
+  <h3>封面设计要点</h3>
+  <div class="mockup">
+    <div class="mockup-header">视觉层次</div>
+    <div class="mockup-body">
+      <ul>
+        <li><strong>背景层</strong>：全屏大图，营造氛围</li>
+        <li><strong>遮罩层</strong>：渐变遮罩，确保文字可读性</li>
+        <li><strong>品牌层</strong>：顶部品牌标识（金色徽章）</li>
+        <li><strong>标题层</strong>：主标题 + 副标题</li>
+        <li><strong>信息层</strong>：日期、地点、活动简介</li>
+      </ul>
+    </div>
+  </div>
+</div>

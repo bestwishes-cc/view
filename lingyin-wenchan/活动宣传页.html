@@ -414,28 +414,6 @@ body {
   </div>
 </section>
 
-<!-- ═══════════ 联络 ═══════════ -->
-<section class="snap-section" data-section="contact">
-  <img class="section-bg-img tea-picker" src="https://images.unsplash.com/photo-1648874856218-6e25adc4e88e?w=1200&fm=jpg" alt="" loading="lazy" decoding="async">
-  <div class="section-watermark">伍</div>
-  <div class="section-inner" style="text-align:center">
-    <div class="section-label">地点与联络</div>
-    <h2 class="section-title" style="font-size:2rem;">期待您的到来</h2>
-    <p class="section-desc">席位有限，敬请提前预约</p>
-
-    <div class="gold-rule"></div>
-
-    <div class="contact-card reveal">
-      <div class="r"><strong>活动地点</strong></div>
-      <div class="r">大家的家 · 隐湖云舍旅居社区</div>
-      <div class="r">杭州市西湖区龙井路</div>
-      <div class="r" style="margin-top:0.4rem;"><strong>预订 & 咨询</strong></div>
-      <div class="r">电话：0571-8891 9111</div>
-      <div class="r">邮箱：gaofuguanjia@126.com</div>
-      <div class="r sub">距黄龙商圈 2.5km &nbsp;/&nbsp; 萧山机场 40km<br>杭州东站 40min &nbsp;/&nbsp; 杭州西站 30min</div>
-    </div>
-  </div>
-</section>
 
 <footer class="footer">© 2026 大家的家 · 隐湖云舍 旅居社区</footer>
 
@@ -449,15 +427,41 @@ body {
   const preloader = document.getElementById('preloader');
   const preloaderBar = document.getElementById('preloaderBar');
   const preloaderPct = document.getElementById('preloaderPct');
-  const images = Array.from(document.querySelectorAll('img[src]'));
-  const total = images.length;
-  let loaded = 0;
+  let preloaderPctValue = 0;
+  let preloaderDone = false;
+  let allImagesLoaded = false;
+  let preloaderRafId = null;
 
-  function updateProgress() {
-    const pct = total > 0 ? Math.round((loaded / total) * 100) : 100;
-    preloaderBar.style.width = pct + '%';
-    preloaderPct.textContent = pct + '%';
-    if (loaded >= total) hidePreloader();
+  const PRELOADER_DURATION = 3000;       // 自动递增到 88% 的时长(ms)
+  const PRELOADER_CAP = 88;               // 自动递增上限(%)
+  const PRELOADER_SLOW = 0.08;            // 到上限后的极慢递增速(%/100ms)
+  const PRELOADER_COMPLETE_DURATION = 250; // 收到加载完成信号后冲到 100% 的时长(ms)
+  const PRELOADER_START = performance.now();
+
+  function setPreloaderPct(val) {
+    preloaderPctValue = Math.min(val, 99);
+    preloaderBar.style.transition = 'none';
+    preloaderBar.style.width = Math.round(preloaderPctValue) + '%';
+    preloaderPct.textContent = Math.round(preloaderPctValue) + '%';
+  }
+
+  function finishPreloader() {
+    if (preloaderDone) return;
+    preloaderDone = true;
+    if (preloaderRafId) cancelAnimationFrame(preloaderRafId);
+    const from = preloaderPctValue;
+    const start = performance.now();
+    function rush(now) {
+      const elapsed = now - start;
+      const t = Math.min(elapsed / PRELOADER_COMPLETE_DURATION, 1);
+      const v = from + (100 - from) * t;
+      preloaderBar.style.transition = 'none';
+      preloaderBar.style.width = v + '%';
+      preloaderPct.textContent = Math.round(v) + '%';
+      if (t < 1) { requestAnimationFrame(rush); }
+      else { hidePreloader(); }
+    }
+    requestAnimationFrame(rush);
   }
 
   function hidePreloader() {
@@ -466,17 +470,53 @@ body {
     setTimeout(() => { if (preloader.parentNode) preloader.remove(); }, 600);
   }
 
-  if (total === 0) { updateProgress(); }
+  // 图片加载监听（仅用于触发完成信号，不驱动进度）
+  const images = Array.from(document.querySelectorAll('img[src]'));
+  const total = images.length;
+  let loaded = 0;
+
+  function onImageDone() {
+    loaded++;
+    if (loaded >= total) {
+      allImagesLoaded = true;
+      if (!preloaderDone) finishPreloader();
+    }
+  }
+
+  if (total === 0) { allImagesLoaded = true; finishPreloader(); }
   else {
     images.forEach(img => {
-      if (img.complete && img.naturalWidth > 0) { loaded++; updateProgress(); }
+      if (img.complete && img.naturalWidth > 0) { onImageDone(); }
       else {
-        img.addEventListener('load', () => { loaded++; updateProgress(); }, { once: true });
-        img.addEventListener('error', () => { loaded++; updateProgress(); }, { once: true });
+        img.addEventListener('load', onImageDone, { once: true });
+        img.addEventListener('error', onImageDone, { once: true });
       }
     });
   }
-  setTimeout(() => hidePreloader(), 10000);
+
+  // 10 秒硬超时兜底
+  setTimeout(() => { if (!preloaderDone) finishPreloader(); }, 10000);
+
+  // 自动平滑递进（不受元素加载情况影响）
+  function autoAdvance() {
+    const now = performance.now();
+    const elapsed = now - PRELOADER_START;
+
+    if (!preloaderDone) {
+      if (elapsed < PRELOADER_DURATION) {
+        const raw = (elapsed / PRELOADER_DURATION) * PRELOADER_CAP;
+        const eased = PRELOADER_CAP * (1 - Math.pow(1 - elapsed / PRELOADER_DURATION, 2));
+        setPreloaderPct(eased);
+      } else if (preloaderPctValue < PRELOADER_CAP) {
+        setPreloaderPct(PRELOADER_CAP);
+      } else {
+        setPreloaderPct(preloaderPctValue + PRELOADER_SLOW);
+        if (allImagesLoaded) finishPreloader();
+      }
+      preloaderRafId = requestAnimationFrame(autoAdvance);
+    }
+  }
+  requestAnimationFrame(autoAdvance);
 
   // ═══ CANVAS PARTICLE ENGINE ═══
   const canvas = document.getElementById('particle-canvas');
