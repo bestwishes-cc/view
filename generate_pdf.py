@@ -77,7 +77,7 @@ def create_pdf():
 def create_cover_page(c):
     """创建封面页"""
     # 绘制背景图片
-    draw_image_with_aspect(c, "assets/images/cover.jpg", 0, 0, PAGE_WIDTH, PAGE_HEIGHT)
+    draw_image_with_aspect(c, "assets/images/new/cover.jpg", 0, 0, PAGE_WIDTH, PAGE_HEIGHT)
 
     # 绘制渐变遮罩
     draw_gradient_overlay(c, DARK_BLUE, 0.3, 0.9, 0, PAGE_HEIGHT)
@@ -125,7 +125,7 @@ def create_overview_page(c):
     """创建活动概要页"""
     # 绘制背景图片
     try:
-        c.drawImage("assets/images/abstract.jpg", 0, 0, PAGE_WIDTH, PAGE_HEIGHT)
+        c.drawImage("assets/images/new/abstract.jpg", 0, 0, PAGE_WIDTH, PAGE_HEIGHT)
     except Exception as e:
         print(f"概要页图片加载失败: {e}")
         c.setFillColor(LIGHT_GRAY)
@@ -185,7 +185,7 @@ def create_tea_page(c):
     """创建茶韵体验页"""
     # 绘制背景图片
     try:
-        c.drawImage("assets/images/tea.jpg", 0, 0, PAGE_WIDTH, PAGE_HEIGHT)
+        c.drawImage("assets/images/new/tea.jpg", 0, 0, PAGE_WIDTH, PAGE_HEIGHT)
     except Exception as e:
         print(f"茶韵页图片加载失败: {e}")
         c.setFillColor(LIGHT_GRAY)
@@ -245,7 +245,7 @@ def create_zen_page(c):
     """创建禅意时光页"""
     # 绘制背景图片
     try:
-        c.drawImage("assets/images/zen.jpg", 0, 0, PAGE_WIDTH, PAGE_HEIGHT)
+        c.drawImage("assets/images/new/zen.jpg", 0, 0, PAGE_WIDTH, PAGE_HEIGHT)
     except Exception as e:
         print(f"禅意页图片加载失败: {e}")
         c.setFillColor(LIGHT_GRAY)
@@ -305,7 +305,7 @@ def create_community_page(c):
     """创建品牌介绍页"""
     # 绘制背景图片
     try:
-        c.drawImage("assets/images/community.jpg", 0, 0, PAGE_WIDTH, PAGE_HEIGHT)
+        c.drawImage("assets/images/new/community.jpg", 0, 0, PAGE_WIDTH, PAGE_HEIGHT)
     except Exception as e:
         print(f"社区页图片加载失败: {e}")
         c.setFillColor(LIGHT_GRAY)
