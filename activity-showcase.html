@@ -68,6 +68,9 @@ body {
 .snap-section.hero-section::before {
   background:linear-gradient(180deg, rgba(247,244,237,0.0) 0%, rgba(247,244,237,0.0) 40%, rgba(247,244,237,0.15) 60%, rgba(247,244,237,0.4) 80%, rgba(247,244,237,0.7) 100%);
 }
+.snap-section[data-section="brand"]::before {
+  background:linear-gradient(180deg, rgba(247,244,237,0.0) 0%, rgba(247,244,237,0.1) 20%, rgba(247,244,237,0.3) 40%, rgba(247,244,237,0.6) 60%, rgba(247,244,237,0.85) 100%);
+}
 
 /* Ink reveal overlay */
 .snap-section::after {
@@ -325,7 +328,7 @@ body {
 
 .brand-text {
   position:relative; z-index:2;
-  text-shadow:0 2px 8px rgba(247,244,237,0.8), 0 1px 3px rgba(247,244,237,0.9);
+  text-shadow:0 2px 10px rgba(247,244,237,0.9), 0 1px 4px rgba(247,244,237,0.95);
 }
 
 /* ═══ RESPONSIVE ═══ */
@@ -452,7 +455,7 @@ body {
 
     <svg class="brush-divider" viewBox="0 0 200 12"><path class="brush-path" d="M10,6 Q50,2 100,6 Q150,10 190,6"/></svg>
 
-    <p class="brand-text" style="font-size:1.2rem; color:var(--ink-soft); line-height:2; margin-bottom:1.5rem; font-weight:600;">
+    <p class="brand-text" style="font-size:1.3rem; color:var(--ink); line-height:2; margin-bottom:1.5rem; font-weight:800;">
       西湖畔的美学宿集<br>
       宋韵园林的现代演绎<br>
       三面茶田森林环抱<br>
@@ -461,7 +464,7 @@ body {
 
     <div class="gold-rule"></div>
 
-    <div class="brand-text" style="font-size:1rem; color:var(--tea); letter-spacing:0.2em; margin-top:1rem; font-weight:700;">
+    <div class="brand-text" style="font-size:1.1rem; color:var(--tea); letter-spacing:0.2em; margin-top:1rem; font-weight:800;">
       距黄龙商圈 2.5km · 萧山机场 40km
     </div>
   </div>
