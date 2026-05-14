@@ -60,13 +60,13 @@ body {
 }
 .snap-section.hero-section { padding:0; }
 
-/* Scrim overlay for text readability */
+/* Scrim overlay for text readability - enhanced */
 .snap-section::before {
   content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
-  background:linear-gradient(180deg, rgba(247,244,237,0.0) 0%, rgba(247,244,237,0.0) 40%, rgba(247,244,237,0.4) 70%, rgba(247,244,237,0.7) 100%);
+  background:linear-gradient(180deg, rgba(247,244,237,0.0) 0%, rgba(247,244,237,0.0) 30%, rgba(247,244,237,0.2) 50%, rgba(247,244,237,0.5) 70%, rgba(247,244,237,0.8) 100%);
 }
 .snap-section.hero-section::before {
-  background:linear-gradient(180deg, rgba(247,244,237,0.0) 0%, rgba(247,244,237,0.0) 50%, rgba(247,244,237,0.3) 75%, rgba(247,244,237,0.6) 100%);
+  background:linear-gradient(180deg, rgba(247,244,237,0.0) 0%, rgba(247,244,237,0.0) 40%, rgba(247,244,237,0.15) 60%, rgba(247,244,237,0.4) 80%, rgba(247,244,237,0.7) 100%);
 }
 
 /* Ink reveal overlay */
@@ -86,13 +86,13 @@ body {
 }
 
 .section-inner { position:relative; z-index:2; max-width:420px; margin:0 auto; width:100%; }
-.section-label { font-size:0.95rem; letter-spacing:0.4em; color:var(--celadon-dark); font-weight:800; margin-bottom:0.5rem; text-shadow:0 1px 2px rgba(247,244,237,0.5); }
+.section-label { font-size:0.95rem; letter-spacing:0.4em; color:var(--celadon-dark); font-weight:800; margin-bottom:0.5rem; text-shadow:0 1px 3px rgba(247,244,237,0.8); }
 .section-title {
   font-family:'Ma Shan Zheng','ZCOOL XiaoWei',cursive;
   font-size:clamp(2.6rem,9vw,3.5rem); font-weight:400; color:var(--ink); margin-bottom:0.5rem; line-height:1.2;
-  text-shadow:0 2px 4px rgba(247,244,237,0.6);
+  text-shadow:0 2px 6px rgba(247,244,237,0.9);
 }
-.section-desc { font-size:1.15rem; color:var(--ink-soft); font-weight:600; margin-bottom:1.5rem; text-shadow:0 1px 2px rgba(247,244,237,0.5); }
+.section-desc { font-size:1.15rem; color:var(--ink-soft); font-weight:600; margin-bottom:1.5rem; text-shadow:0 1px 3px rgba(247,244,237,0.8); }
 
 /* ═══ HERO ═══ */
 .hero-section { min-height:100vh; min-height:100dvh; position:relative; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden; }
@@ -133,7 +133,7 @@ body {
   100%{opacity:1; transform:translateY(0) rotate(-8deg) scale(1)}
 }
 
-.hero-tag { font-size:1.05rem; letter-spacing:0.35em; color:var(--tea); margin-bottom:0.8rem; opacity:0; animation:fadeRise 0.8s 0.5s forwards; font-weight:700; text-shadow:0 1px 2px rgba(247,244,237,0.5); }
+.hero-tag { font-size:1.05rem; letter-spacing:0.35em; color:var(--tea); margin-bottom:0.8rem; opacity:0; animation:fadeRise 0.8s 0.5s forwards; font-weight:700; text-shadow:0 1px 3px rgba(247,244,237,0.8); }
 
 /* Character animation */
 .char-reveal { display:inline-block; clip-path:inset(0 100% 0 0); animation:charWrite 0.6s var(--ease-smooth) forwards; }
@@ -143,11 +143,11 @@ body {
   font-family:'Ma Shan Zheng','ZCOOL XiaoWei',cursive;
   font-size:clamp(4.5rem,16vw,7rem); font-weight:400; color:var(--ink);
   line-height:1.15; letter-spacing:0.08em;
-  text-shadow:0 2px 4px rgba(247,244,237,0.6);
+  text-shadow:0 2px 8px rgba(247,244,237,0.9);
 }
-.hero-subtitle { font-size:clamp(1.3rem,4vw,1.8rem); color:var(--ink-soft); font-weight:600; margin-top:0.4rem; letter-spacing:0.15em; opacity:0; animation:fadeRise 0.8s 1.3s forwards; text-shadow:0 1px 2px rgba(247,244,237,0.5); }
+.hero-subtitle { font-size:clamp(1.3rem,4vw,1.8rem); color:var(--ink-soft); font-weight:600; margin-top:0.4rem; letter-spacing:0.15em; opacity:0; animation:fadeRise 0.8s 1.3s forwards; text-shadow:0 1px 3px rgba(247,244,237,0.8); }
 .hero-line { width:60px; height:2px; background:linear-gradient(90deg,var(--tea-light),var(--gold-bright)); margin:1.2rem auto; opacity:0; animation:fadeRise 0.8s 1.5s forwards; }
-.hero-info { font-size:1.1rem; color:var(--ink-soft); line-height:2.2; opacity:0; animation:fadeRise 0.8s 1.7s forwards; font-weight:600; text-shadow:0 1px 2px rgba(247,244,237,0.5); }
+.hero-info { font-size:1.1rem; color:var(--ink-soft); line-height:2.2; opacity:0; animation:fadeRise 0.8s 1.7s forwards; font-weight:600; text-shadow:0 1px 3px rgba(247,244,237,0.8); }
 .hero-info em { font-style:normal; color:var(--tea); font-weight:800; }
 
 @keyframes fadeRise { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
@@ -215,8 +215,8 @@ body {
 .card:active::after, .card:hover::after { left:120%; }
 
 .card-icon { font-size:1.8rem; margin-bottom:0.5rem; display:block; position:relative; z-index:2; }
-.card h3 { font-size:1.25rem; font-weight:800; color:var(--ink); margin-bottom:0.5rem; position:relative; z-index:2; text-shadow:0 1px 2px rgba(247,244,237,0.5); }
-.card p { font-size:1.05rem; color:var(--ink-soft); line-height:1.85; position:relative; z-index:2; font-weight:600; text-shadow:0 1px 2px rgba(247,244,237,0.5); }
+.card h3 { font-size:1.25rem; font-weight:800; color:var(--ink); margin-bottom:0.5rem; position:relative; z-index:2; text-shadow:0 1px 3px rgba(247,244,237,0.8); }
+.card p { font-size:1.05rem; color:var(--ink-soft); line-height:1.85; position:relative; z-index:2; font-weight:600; text-shadow:0 1px 3px rgba(247,244,237,0.8); }
 
 /* ═══ ATMOSPHERE CARDS ═══ */
 .atmosphere-grid {
@@ -229,8 +229,8 @@ body {
 }
 .atmosphere-item:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.06); }
 .atmosphere-item .icon { font-size:1.6rem; margin-bottom:0.5rem; }
-.atmosphere-item h4 { font-size:1.15rem; font-weight:800; color:var(--ink); margin-bottom:0.5rem; text-shadow:0 1px 2px rgba(247,244,237,0.5); }
-.atmosphere-item p { font-size:1rem; color:var(--ink-soft); line-height:1.7; font-weight:600; text-shadow:0 1px 2px rgba(247,244,237,0.5); }
+.atmosphere-item h4 { font-size:1.15rem; font-weight:800; color:var(--ink); margin-bottom:0.5rem; text-shadow:0 1px 3px rgba(247,244,237,0.8); }
+.atmosphere-item p { font-size:1rem; color:var(--ink-soft); line-height:1.7; font-weight:600; text-shadow:0 1px 3px rgba(247,244,237,0.8); }
 
 /* ═══ CONTACT ═══ */
 .contact-card {
@@ -238,12 +238,12 @@ body {
   padding:1.6rem; max-width:360px; width:100%; margin:0 auto;
   box-shadow:0 8px 40px rgba(0,0,0,0.04);
 }
-.contact-card .r { font-size:1.1rem; color:var(--ink-soft); margin-bottom:0.5rem; line-height:1.8; font-weight:600; text-shadow:0 1px 2px rgba(247,244,237,0.5); }
+.contact-card .r { font-size:1.1rem; color:var(--ink-soft); margin-bottom:0.5rem; line-height:1.8; font-weight:600; text-shadow:0 1px 3px rgba(247,244,237,0.8); }
 .contact-card .r strong { color:var(--ink); font-weight:800; }
 .contact-card .r.sub { font-size:0.95rem; margin-top:0.5rem; }
 
 /* ═══ FOOTER ═══ */
-.footer { text-align:center; padding:2rem; font-size:0.95rem; color:var(--ink-soft); opacity:0.8; letter-spacing:0.18em; position:relative; z-index:1; font-weight:600; text-shadow:0 1px 2px rgba(247,244,237,0.5); }
+.footer { text-align:center; padding:2rem; font-size:0.95rem; color:var(--ink-soft); opacity:0.8; letter-spacing:0.18em; position:relative; z-index:1; font-weight:600; text-shadow:0 1px 3px rgba(247,244,237,0.8); }
 
 /* ═══ TOUCH RIPPLE ═══ */
 .touch-ripple {
@@ -313,33 +313,19 @@ body {
   50%{opacity:0.9; transform:translateX(-20px)}
 }
 
-/* ═══ SOLID SHAPE BACKGROUNDS ═══ */
+/* ═══ ENHANCED TEXT READABILITY ═══ */
 .hero-content {
   position:relative; z-index:3; max-width:400px; padding:2rem 1.2rem;
-  background:rgba(247,244,237,0.85);
-  border:1px solid rgba(196,163,90,0.2);
-  box-shadow:0 8px 32px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.05);
-  border-radius:2px;
 }
 
-.intro-quote-wrap {
+.intro-quote {
   position:relative; z-index:2;
-  background:rgba(247,244,237,0.85);
-  border:1px solid rgba(196,163,90,0.2);
-  box-shadow:0 8px 32px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.05);
-  border-radius:2px;
-  padding:2rem 1.5rem;
-  max-width:400px; margin:0 auto;
+  text-shadow:0 2px 8px rgba(247,244,237,0.8), 0 1px 3px rgba(247,244,237,0.9);
 }
 
-.brand-content-wrap {
+.brand-text {
   position:relative; z-index:2;
-  background:rgba(247,244,237,0.85);
-  border:1px solid rgba(196,163,90,0.2);
-  box-shadow:0 8px 32px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.05);
-  border-radius:2px;
-  padding:2rem 1.5rem;
-  max-width:420px; margin:0 auto;
+  text-shadow:0 2px 8px rgba(247,244,237,0.8), 0 1px 3px rgba(247,244,237,0.9);
 }
 
 /* ═══ RESPONSIVE ═══ */
@@ -391,14 +377,12 @@ body {
   <img class="section-bg-img intro-lake" src="https://images.unsplash.com/photo-1697553308664-5aed18530490?w=1200&fm=jpg" alt="" loading="lazy" decoding="async">
   <div class="section-watermark">壹</div>
   <div class="section-inner">
-    <div class="intro-quote-wrap">
-      <p class="intro-quote">
-        提竹篓入百亩茶园<br>指尖掐下春日的嫩绿<br>
-        暮时沐手抄经<br>晨起<em>灵隐古刹</em>探秘<br>
-        在西湖山水与茶香之间<br>
-        备好了一场<em>安静而有份量</em>的相聚
-      </p>
-    </div>
+    <p class="intro-quote">
+      提竹篓入百亩茶园<br>指尖掐下春日的嫩绿<br>
+      暮时沐手抄经<br>晨起<em>灵隐古刹</em>探秘<br>
+      在西湖山水与茶香之间<br>
+      备好了一场<em>安静而有份量</em>的相聚
+    </p>
   </div>
 </section>
 
@@ -462,25 +446,23 @@ body {
   <img class="section-bg-img temple" src="https://images.unsplash.com/photo-1701070658926-5a7844890fb6?w=1200&fm=jpg" alt="" loading="lazy" decoding="async">
   <div class="section-watermark">肆</div>
   <div class="section-inner" style="text-align:center;">
-    <div class="brand-content-wrap">
-      <div class="section-label">高端旅居</div>
-      <h2 class="section-title">隐湖云舍</h2>
-      <p class="section-desc">大家的家 · 高端旅居品牌</p>
+    <div class="section-label">高端旅居</div>
+    <h2 class="section-title">隐湖云舍</h2>
+    <p class="section-desc">大家的家 · 高端旅居品牌</p>
 
-      <svg class="brush-divider" viewBox="0 0 200 12"><path class="brush-path" d="M10,6 Q50,2 100,6 Q150,10 190,6"/></svg>
+    <svg class="brush-divider" viewBox="0 0 200 12"><path class="brush-path" d="M10,6 Q50,2 100,6 Q150,10 190,6"/></svg>
 
-      <p style="font-size:1.2rem; color:var(--ink-soft); line-height:2; margin-bottom:1.5rem; font-weight:600; text-shadow:0 1px 2px rgba(247,244,237,0.5);">
-        西湖畔的美学宿集<br>
-        宋韵园林的现代演绎<br>
-        三面茶田森林环抱<br>
-        离尘不离城的理想之地
-      </p>
+    <p class="brand-text" style="font-size:1.2rem; color:var(--ink-soft); line-height:2; margin-bottom:1.5rem; font-weight:600;">
+      西湖畔的美学宿集<br>
+      宋韵园林的现代演绎<br>
+      三面茶田森林环抱<br>
+      离尘不离城的理想之地
+    </p>
 
-      <div class="gold-rule"></div>
+    <div class="gold-rule"></div>
 
-      <div style="font-size:1rem; color:var(--tea); letter-spacing:0.2em; margin-top:1rem; font-weight:700; text-shadow:0 1px 2px rgba(247,244,237,0.5);">
-        距黄龙商圈 2.5km · 萧山机场 40km
-      </div>
+    <div class="brand-text" style="font-size:1rem; color:var(--tea); letter-spacing:0.2em; margin-top:1rem; font-weight:700;">
+      距黄龙商圈 2.5km · 萧山机场 40km
     </div>
   </div>
 </section>
