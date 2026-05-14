@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>茶禅雅集 · 老友节高客服务发布会</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #1a365d;
+            --primary-medium: #2d5a8e;
+            --primary-light: #4a7ab5;
+            --gold: #d4af37;
+            --gold-light: #e8c547;
+            --cream: #f8f5f0;
+            --white: #ffffff;
+            --text-dark: #1a1a1a;
+            --text-medium: #4a4a4a;
+            --text-light: #8a8a8a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--cream);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 50%, var(--primary-light) 100%);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(ellipse at 20% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='%23ffffff' fill-opacity='0.5'/%3E%3C/svg%3E");
+            background-size: 60px 60px;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 0 20px;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 24px;
+            background: rgba(212, 175, 55, 0.9);
+            color: var(--white);
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-radius: 30px;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-brand {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--gold);
+            letter-spacing: 4px;
+            margin-bottom: 30px;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .hero-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: clamp(48px, 8vw, 80px);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-subtitle {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: clamp(18px, 3vw, 24px);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 2px;
+            margin-bottom: 50px;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero-divider {
+            width: 80px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 auto 40px;
+            animation: scaleX 1s ease-out 0.6s both;
+        }
+
+        .hero-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .hero-info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .hero-info-item svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--gold);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            fill: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 120px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 600;
+            color: var(--primary-dark);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Experience Section */
+        .experience-section {
+            background: var(--white);
+            padding: 120px 20px;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .experience-card {
+            position: relative;
+            background: var(--cream);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-card-image {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .experience-card-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(26, 54, 93, 0.8), transparent);
+        }
+
+        .experience-card-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1;
+            padding: 6px 16px;
+            background: var(--gold);
+            color: var(--white);
+            font-size: 11px;
+            letter-spacing: 2px;
+            border-radius: 20px;
+        }
+
+        .experience-card-title {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 1;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .experience-card-content {
+            padding: 30px;
+        }
+
+        .experience-card-description {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--text-medium);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .experience-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .experience-card-tag {
+            padding: 4px 12px;
+            background: var(--primary-dark);
+            color: var(--white);
+            font-size: 11px;
+            letter-spacing: 1px;
+            border-radius: 15px;
+        }
+
+        /* Highlights Section */
+        .highlights-section {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-medium) 100%);
+            padding: 120px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlights-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%23ffffff' stroke-width='1'/%3E%3C/svg%3E");
+            background-size: 100px 100px;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight-item {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .highlight-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .highlight-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: var(--gold);
+        }
+
+        .highlight-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+
+        .highlight-description {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        /* Venue Section */
+        .venue-section {
+            background: var(--white);
+            padding: 120px 20px;
+        }
+
+        .venue-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .venue-image {
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .venue-image::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: -20px;
+            bottom: -20px;
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            z-index: -1;
+        }
+
+        .venue-info {
+            padding: 20px;
+        }
+
+        .venue-label {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .venue-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--primary-dark);
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+
+        .venue-description {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--text-medium);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .venue-features {
+            list-style: none;
+        }
+
+        .venue-features li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .venue-features li::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%);
+            padding: 120px 20px;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-label {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .cta-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 600;
+            color: var(--primary-dark);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--text-medium);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 48px;
+            background: var(--primary-dark);
+            color: var(--white);
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-dark);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--primary-dark);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-dark);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 13px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+        }
+
+        .footer-divider {
+            width: 60px;
+            height: 1px;
+            background: rgba(212, 175, 55, 0.3);
+            margin: 30px auto;
+        }
+
+        .footer-copyright {
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 12px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleX {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-info {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .venue-content {
+                grid-template-columns: 1fr;
+            }
+
+            .venue-image {
+                height: 300px;
+            }
+
+            .venue-image::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-pattern"></div>
+        <div class="hero-content">
+            <div class="hero-badge">尊享邀约</div>
+            <div class="hero-brand">大家的家 · 隐湖云舍</div>
+            <h1 class="hero-title">茶禅雅集</h1>
+            <p class="hero-subtitle">老友节高客服务发布会</p>
+            <div class="hero-divider"></div>
+            <div class="hero-info">
+                <div class="hero-info-item">
+                    <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
+                    <span>2026年5月29-30日</span>
+                </div>
+                <div class="hero-info-item">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <span>杭州 · 西湖畔</span>
+                </div>
+                <div class="hero-info-item">
+                    <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    <span>20人尊享</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience-section">
+        <div class="section-header">
+            <div class="section-label">两天一夜</div>
+            <h2 class="section-title">沉浸式体验</h2>
+            <p class="section-subtitle">在西湖畔的园林中，体验茶道与禅修的雅致时光</p>
+        </div>
+        <div class="experience-grid">
+            <div class="experience-card">
+                <div class="experience-card-image" style="background-image: url('https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&h=600&fit=crop')">
+                    <div class="experience-card-badge">第一日 · 茶</div>
+                    <h3 class="experience-card-title">尊享茶道体验</h3>
+                </div>
+                <div class="experience-card-content">
+                    <p class="experience-card-description">宋韵点茶，田园雅趣，西湖春茶。在茶园中感受自然，在茶香中品味人生。</p>
+                    <div class="experience-card-tags">
+                        <span class="experience-card-tag">茶韵</span>
+                        <span class="experience-card-tag">雅趣</span>
+                        <span class="experience-card-tag">自然</span>
+                    </div>
+                </div>
+            </div>
+            <div class="experience-card">
+                <div class="experience-card-image" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop')">
+                    <div class="experience-card-badge">第二日 · 禅</div>
+                    <h3 class="experience-card-title">灵隐探秘</h3>
+                </div>
+                <div class="experience-card-content">
+                    <p class="experience-card-description">古刹禅境，静谧时光，身心净化。在灵隐感受禅意，在古刹中净化心灵。</p>
+                    <div class="experience-card-tags">
+                        <span class="experience-card-tag">禅意</span>
+                        <span class="experience-card-tag">古刹</span>
+                        <span class="experience-card-tag">净化</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section class="highlights-section">
+        <div class="section-header">
+            <div class="section-label">尊享体验</div>
+            <h2 class="section-title" style="color: var(--white);">专属亮点</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.7);">为高端客户定制的专属服务</p>
+        </div>
+        <div class="highlights-grid">
+            <div class="highlight-item">
+                <div class="highlight-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z"/></svg>
+                </div>
+                <h3 class="highlight-title">尊享专属</h3>
+                <p class="highlight-description">高端定制，专属服务，一对一贴心体验</p>
+            </div>
+            <div class="highlight-item">
+                <div class="highlight-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                </div>
+                <h3 class="highlight-title">高端品质</h3>
+                <p class="highlight-description">精选场地，优质服务，细节之处见真章</p>
+            </div>
+            <div class="highlight-item">
+                <div class="highlight-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                </div>
+                <h3 class="highlight-title">文化沉浸</h3>
+                <p class="highlight-description">茶道禅修，传统文化，身心双重享受</p>
+            </div>
+            <div class="highlight-item">
+                <div class="highlight-icon">
+                    <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                </div>
+                <h3 class="highlight-title">小班精品</h3>
+                <p class="highlight-description">20人小班，确保每位宾客的专属体验</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Venue Section -->
+    <section class="venue-section">
+        <div class="venue-content">
+            <div class="venue-image" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=1000&fit=crop')"></div>
+            <div class="venue-info">
+                <div class="venue-label">活动地点</div>
+                <h2 class="venue-title">隐湖云舍</h2>
+                <p class="venue-description">大家的家·隐湖云舍旅居社区，坐落于西湖畔的园林之中。这里是高端旅居品牌的代表，将宋韵园林与现代生活完美融合，为宾客提供一个远离尘嚣、回归自然的理想之地。</p>
+                <ul class="venue-features">
+                    <li>西湖畔的美学宿集</li>
+                    <li>宋韵园林的现代演绎</li>
+                    <li>高端旅居品牌代表</li>
+                    <li>专属定制服务体验</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <div class="cta-label">名额有限</div>
+            <h2 class="cta-title">尊享预约</h2>
+            <p class="cta-description">仅限20位高端客户，专属定制体验。请联系您的专属顾问，预约尊享名额。</p>
+            <a href="#" class="cta-button">立即预约</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-brand">大家的家 · 隐湖云舍</div>
+        <p class="footer-text">杭州 · 西湖畔<br>高端旅居社区</p>
+        <div class="footer-divider"></div>
+        <p class="footer-copyright">© 2026 隐湖云舍 版权所有</p>
+    </footer>
+
+    <script>
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.experience-card, .highlight-item, .venue-content').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Smooth scroll for scroll indicator
+        document.querySelector('.scroll-indicator').addEventListener('click', () => {
+            document.querySelector('.experience-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
